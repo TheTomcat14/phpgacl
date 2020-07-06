@@ -1,0 +1,30 @@
+{
+    "name": "higis/phpgacl",
+    "description": "A PHP class offering Web developers a simple, yet immensely powerful \"drop in\" permission system to their current Web based applications. http://phpgacl.sourceforge.net/",
+    "type": "library",
+    "require": {
+        "smarty/smarty": "2.*",
+        "adodb/adodb-php": "5.*",
+        "psr/log": "*",
+        "psr/cache": "*"
+    },
+    "require-dev": {
+      "monolog/monolog": "*",
+      "laminas/laminas-cache": "*",
+        "phpunit/phpunit": "8"
+    },
+    "license": "General Public License",
+    "autoload" : {
+        "psr-4": { "Higis\\PhpGacl\\": ["src/"] }
+    },
+    "authors": [
+        {
+            "name": "Mike Benoit",
+            "email": "ipso@snappymail.ca"
+        },
+        {
+            "name": "Paul Winnen",
+            "email": "paul.winnen@higis.eu.org"
+        }
+    ]
+}
