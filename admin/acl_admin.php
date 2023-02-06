@@ -213,17 +213,17 @@ switch ($_POST['action']) {
         if (isset($optionsSelectedAco)) {
             $smarty->assign('options_selected_aco', $optionsSelectedAco);
         }
-        $smarty->assign('selected_aco', @array_keys($optionsSelectedAco));
+        $smarty->assign('selected_aco', (is_array($optionsSelectedAco) ? array_keys($optionsSelectedAco) : false));
 
         if (isset($optionsSelectedAro)) {
             $smarty->assign('options_selected_aro', $optionsSelectedAro);
         }
-        $smarty->assign('selected_aro', @array_keys($optionsSelectedAro));
+        $smarty->assign('selected_aro', (is_array($optionsSelectedAro) ? array_keys($optionsSelectedAro) : false));
 
         if (isset($optionsSelectedAxo)) {
             $smarty->assign('options_selected_axo', $optionsSelectedAxo);
         }
-        $selectedAxo = @array_keys($optionsSelectedAxo);
+        $selectedAxo = (is_array($optionsSelectedAxo) ? array_keys($optionsSelectedAxo) : false);
 
         $smarty->assign('selected_axo', $selectedAxo);
 
@@ -250,4 +250,5 @@ $smarty->assign('page_title', 'ACL Admin');
 
 $smarty->assign('phpgacl_version', $gaclApi->getVersion());
 $smarty->assign('phpgacl_schema_version', $gaclApi->getSchemaVersion());
+
 $smarty->display('phpgacl/acl_admin.tpl');

@@ -47,14 +47,16 @@ switch ($_POST['action']) {
         $gaclApi->debugText("Submit!!");
 
         //Update sections
-        while (list(,$row) = @each($_POST['sections'])) {
-            list($id, $value, $order, $name) = $row;
-            $gaclApi->editObjectSection($id, $name, $value, $order, 0, $objectType);
+        if (!empty($_POST['sections']) && is_array($_POST['sections'])) {
+            while (list(,$row) = @each($_POST['sections'])) {
+                list($id, $value, $order, $name) = $row;
+                $gaclApi->editObjectSection($id, $name, $value, $order, 0, $objectType);
+            }
+            unset($id);
+            unset($value);
+            unset($order);
+            unset($name);
         }
-        unset($id);
-        unset($value);
-        unset($order);
-        unset($name);
 
         //Insert new sections
         while (list(,$row) = @each($_POST['new_sections'])) {
