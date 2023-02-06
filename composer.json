@@ -3,15 +3,16 @@
     "description": "A PHP class offering Web developers a simple, yet immensely powerful \"drop in\" permission system to their current Web based applications. http://phpgacl.sourceforge.net/",
     "type": "library",
     "require": {
-        "smarty/smarty": "2.*",
+        "smarty/smarty": "*",
         "adodb/adodb-php": "5.*",
         "psr/log": "*",
-        "psr/cache": "*"
+        "psr/cache": "*",
+        "christiaanbye/polyfill-each": "^1.0"
     },
     "require-dev": {
       "monolog/monolog": "*",
       "laminas/laminas-cache": "*",
-        "phpunit/phpunit": "8"
+        "phpunit/phpunit": "*"
     },
     "license": "General Public License",
     "autoload" : {
