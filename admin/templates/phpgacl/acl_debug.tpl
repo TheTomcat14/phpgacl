@@ -39,7 +39,7 @@
     </td>
   </tr>
 </table>
-{if count($acls) gt 0}
+{if $acls|@count gt 0}
 <br>
 <table class="table table-sm table-bordered">
   <tr class="thead-dark">
