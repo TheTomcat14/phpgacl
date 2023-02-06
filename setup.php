@@ -71,7 +71,7 @@ if (is_object($db->_connectionID)) {
 echo '<hr/><h2>Testing database type...</h2>'."\n";
 
 switch ( $dbType ) {
-    case ($dbType == "mysql" OR $dbType == "mysqlt" OR $dbType == "maxsql" ):
+    case ($dbType == "mysql" OR $dbType == "mysqli" OR $dbType == "mysqlt" OR $dbType == "maxsql" ):
         echoSuccess("Compatible database type \"<strong>$dbType</strong>\" detected!");
     echoNormal("Making sure database \"<strong>$dbName</strong>\" exists...");
 
