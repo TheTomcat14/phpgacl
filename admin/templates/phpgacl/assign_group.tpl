@@ -21,7 +21,7 @@
                 <i class="fa fa-pencil"></i> Edit
               </a>
               <br>
-              <select class="form-control form-control-sm mt-1" name="{$group_type}_section" tabindex="0" size="10" width="200" onclick="populate(document.assign_group.{$group_type}_section,document.assign_group.elements['objects[]'],'{$js_array_name}')">
+              <select class="form-control form-control-sm mt-1" name="{$group_type}_section" tabindex="0" size="10" width="200" onclick="populate(document.assign_group.{$group_type}_section,document.assign_group.elements['objects[]'],'{$js_array_name}')" style="height:15rem;">
                 {html_options options=$options_sections selected=$section_value}
               </select>
             </td>
@@ -34,7 +34,7 @@
                   <i class="fa fa-search"></i> Search
                 </a>
               </div>
-              <select class="form-control form-control-sm mt-1" name="objects[]" tabindex="0" size="10" width="200" multiple="multiple">
+              <select class="form-control form-control-sm mt-1" name="objects[]" tabindex="0" size="10" width="200" multiple="multiple" style="height:15rem;">
               </select>
             </td>
             <td class="align-middle">
@@ -43,8 +43,8 @@
                 <button type="button" class="btn btn-sm btn-primary" name="deselect" onClick="deselect_item(document.assign_group.elements['selected_{$group_type}[]'])"><i class="{#icon_left#} pl-2 pr-2"></i></button>
               </div>
             </td>
-            <td>
-              <select class="form-control form-control-sm mt-1" name="selected_{$group_type}[]" tabindex="0" size="10" width="200" multiple="multiple">
+            <td class="align-bottom">
+              <select class="form-control form-control-sm mt-1" name="selected_{$group_type}[]" tabindex="0" size="10" width="200" multiple="multiple" style="height:15rem;">
         {html_options options=$options_selected_objects selected=$selected_object}
               </select>
             </td>

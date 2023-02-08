@@ -22,7 +22,7 @@
               <a class="btn btn-sm btn-warning" href="edit_object_sections.php?object_type=aco&return_page={$return_page}" title="Edit">
                 <i class="{#icon_edit#}"></i> Edit
               </a>
-              <select class="form-control form-control-sm mt-1" name="aco_section" tabindex="0" size="10" onclick="populate(document.acl_admin.aco_section,document.acl_admin.elements['aco[]'], '{$js_aco_array_name}')">
+              <select class="form-control form-control-sm mt-1" name="aco_section" tabindex="0" size="10" onclick="populate(document.acl_admin.aco_section,document.acl_admin.elements['aco[]'], '{$js_aco_array_name}')" style="height:15rem;">
                 {html_options options=$options_aco_sections selected=$aco_section_value}
               </select>
             </td>
@@ -30,7 +30,7 @@
               <a class="btn btn-sm btn-warning" href="javascript: location.href = 'edit_objects.php?object_type=aco&section_value=' + document.acl_admin.aco_section.options[document.acl_admin.aco_section.selectedIndex].value + '&return_page={$return_page}';" title="Edit">
                 <i class="{#icon_edit#}"></i> Edit
               </a>
-              <select class="form-control form-control-sm mt-1" name="aco[]" tabindex="0" size="10" multiple="multiple">
+              <select class="form-control form-control-sm mt-1" name="aco[]" tabindex="0" size="10" multiple="multiple" style="height:15rem;">
               </select>
             </td>
             <td class="align-middle">
@@ -44,7 +44,7 @@
               </div>
             </td>
             <td class="align-bottom">
-              <select class="form-control form-control-sm" name="selected_aco[]" tabindex="0" size="10" multiple="multiple">
+              <select class="form-control form-control-sm" name="selected_aco[]" tabindex="0" size="10" multiple="multiple" style="height:15rem;">
         {html_options options=$options_selected_aco selected=$selected_aco}
               </select>
             </td>
@@ -83,7 +83,7 @@
                   <i class="{#icon_search#}"></i> Search
                 </a>
               </div>
-              <select class="form-control form-control-sm mt-1" name="aro[]" tabindex="0" size="10" multiple="multiple">
+              <select class="form-control form-control-sm mt-1" name="aro[]" tabindex="0" size="10" multiple="multiple" style="height:15rem;">
               </select>
             </td>
             <td class="align-middle">
@@ -93,7 +93,7 @@
               </div>
             </td>
             <td class="align-bottom">
-             <select class="form-control form-control-sm" name="selected_aro[]" tabindex="0" size="10" multiple="multiple">
+             <select class="form-control form-control-sm" name="selected_aro[]" tabindex="0" size="10" multiple="multiple" style="height:15rem;">
          {html_options options=$options_selected_aro selected=$selected_aro}
              </select>
             </td>
@@ -136,7 +136,7 @@
               <a class="btn btn-sm btn-warning" href="edit_object_sections.php?object_type=axo&return_page={$return_page}">
                 <i class="{#icon_edit#}"></i> Edit
               </a>
-              <select class="form-control form-control-sm mt-1" name="axo_section" tabindex="0" size="10" onclick="populate(document.acl_admin.axo_section,document.acl_admin.elements['axo[]'],'{$js_axo_array_name}')">
+              <select class="form-control form-control-sm mt-1" name="axo_section" tabindex="0" size="10" onclick="populate(document.acl_admin.axo_section,document.acl_admin.elements['axo[]'],'{$js_axo_array_name}')" style="height:15rem;">
                 {html_options options=$options_axo_sections selected=$axo_section_value}
               </select>
             </td>
@@ -149,7 +149,7 @@
                   <i class="{#icon_search#}"></i> Search
                 </a>
               </div>
-              <select class="form-control form-control-sm mt-1" name="axo[]" tabindex="0" size="10" multiple="multiple">
+              <select class="form-control form-control-sm mt-1" name="axo[]" tabindex="0" size="10" multiple="multiple" style="height:15rem;">
               </select>
             </td>
             <td class="align-middle">
@@ -159,7 +159,7 @@
               </div>
             </td>
             <td class="align-bottom">
-              <select class="form-control form-control-sm" name="selected_axo[]" tabindex="0" size="10" multiple="multiple">
+              <select class="form-control form-control-sm" name="selected_axo[]" tabindex="0" size="10" multiple="multiple" style="height:15rem;">
                 {html_options options=$options_selected_axo selected=$selected_axo}
               </select>
             </td>
