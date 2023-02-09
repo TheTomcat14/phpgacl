@@ -80,15 +80,15 @@ class GaclAdminApi extends GaclApi
     {
         global $_SERVER, $debug;
 
-        if (empty($url) and !empty($_SERVER[HTTP_REFERER])) {
+        if (empty($url) and !empty($_SERVER['HTTP_REFERER'])) {
             $this->debugText(__METHOD__ . "(): URL not set, using referer!");
-            $url = $_SERVER[HTTP_REFERER];
+            $url = $_SERVER['HTTP_REFERER'];
         }
 
         if (!$debug or $debug == 0) {
             header("Location: $url\n\n");
         } else {
-            $this->debugText(__METHOD__ . "(): URL: $url -- Referer: $_SERVER[HTTP_REFERRER]");
+            $this->debugText(__METHOD__ . '(): URL: ' . $url . ' -- Referer: ' . $_SERVER['HTTP_REFERRER']);
         }
     }
 
