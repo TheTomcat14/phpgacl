@@ -49,11 +49,22 @@
               </select>
             </td>
             <td class="align-middle">
-              <table class="invisible">
-                <tr class="text-left"><td><input type="radio" class="radio" name="allow" value="1" {if $allow==1}checked{/if}></td><td>Allow</td></tr>
-                <tr class="text-left"><td><input type="radio" class="radio" name="allow" value="0" {if $allow==0}checked{/if}></td><td>Deny</td></tr>
-                <tr class="spacer"><td colspan="2"></td></tr>
-                <tr class="text-left"><td><input type="checkbox" class="checkbox" name="enabled" value="1" {if $enabled==1}checked="checked"{/if}></td><td>Enabled</td></tr>
+              <table>
+                <tr class="text-left">
+                  <td class="border-0 bg-success"><input type="radio" class="radio" name="allow" value="1" {if $allow==1}checked{/if}></td>
+                  <td class="border-0 bg-success">Allow</td>
+                </tr>
+                <tr class="text-left">
+                  <td class="border-0 bg-danger"><input type="radio" class="radio" name="allow" value="0" {if $allow==0}checked{/if}></td>
+                  <td class="border-0 bg-danger text-white">Deny</td>
+                </tr>
+                <tr class="spacer">
+                  <td class="border-0" colspan="2"></td>
+                </tr>
+                <tr class="text-left">
+                  <td class="border-0"><input type="checkbox" class="checkbox" name="enabled" value="1" {if $enabled==1}checked="checked"{/if}></td>
+                  <td class="border-0">Enabled</td>
+                </tr>
              </table>
            </td>
           </tr>
