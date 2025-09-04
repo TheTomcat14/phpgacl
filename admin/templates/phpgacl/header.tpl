@@ -10,5 +10,3 @@
 
     <title>phpGACL - {$page_title}</title>
     <link rel="stylesheet" href="css/font-awesome.min.css">
-
-{config_load file='vars.conf' scope="global"}
