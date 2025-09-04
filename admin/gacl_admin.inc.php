@@ -1,4 +1,6 @@
 <?php
+use Smarty\Smarty;
+
 /**
  * phpGACL - Generic Access Control List
  * Copyright (C) 2002 Mike Benoit
@@ -88,9 +90,15 @@ $db = &$gacl->db;
 $smarty = new Smarty();
 
 $smarty->compile_check = true;
-$smarty->template_dir  = $gaclOptions['smarty_template_dir'];
-$smarty->compile_dir   = $gaclOptions['smarty_compile_dir'];
-$smarty->config_dir    = $gaclOptions['smarty_config_dir'];
+$smarty->setTemplateDir($gaclOptions['smarty_template_dir']);
+$smarty->setCompileDir($gaclOptions['smarty_compile_dir']);
+$smarty->setConfigDir($gaclOptions['smarty_config_dir']);
+
+
+$smarty->registerPlugin(Smarty::PLUGIN_MODIFIER, 'dirname', 'dirname');
+$smarty->registerPlugin(Smarty::PLUGIN_MODIFIER, 'urlencode', 'urlencode');
+
+$smarty->configLoad('vars.conf');
 
 /*
  * Email address used in setup.php, please do not change.
