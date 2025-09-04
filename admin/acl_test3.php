@@ -9,7 +9,7 @@
  */
 @set_time_limit(600);
 
-require_once '../profiler.inc';
+require_once '../profiler.inc.php';
 $profiler = new Profiler(true, true);
 
 require_once "gacl_admin.inc.php";
@@ -107,7 +107,7 @@ if ($totalRows > 0) {
     $avgAclCheckTime = $totalAclCheckTime / $totalRows;
 }
 $smarty->assign("avg_acl_check_time", number_format(($avgAclCheckTime + 0), 2));
-$smarty->assign("paging_data", $gaclApi->get_paging_data($rs));
+$smarty->assign("paging_data", $gaclApi->getPagingData($rs));
 $smarty->assign("return_page", $_SERVER['PHP_SELF']);
 $smarty->assign('current', 'acl_test');
 $smarty->assign('page_title', '3-dim. ACL Test');
