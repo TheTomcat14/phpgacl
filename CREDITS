@@ -1,3 +1,6 @@
+Paul Winnen <paul.winnen@higis.eu.org>
+    Updated the code to work past PHP8.
+
 Mike Benoit <ipso@snappymail.ca>
     Wrote initial "proof of concept" implementation, and maintains documentation & code base.
 
