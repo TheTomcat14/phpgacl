@@ -24,8 +24,8 @@ switch (strtolower(trim($groupType))) {
         $groupTable = $gaclApi->dbTablePrefix . 'aro_groups';
         break;
 }
-
-switch ($_POST['action']) {
+$action = (isset($_POST['action']) ? $_POST['action'] : null);
+switch ($action) {
     case 'Delete':
         $gaclApi->debugText('Delete');
 
@@ -91,7 +91,7 @@ switch ($_POST['action']) {
             $name = '';
         }
 
-        $smarty->assign('id', $id);
+        $smarty->assign('id', (isset($id) ? $id : null));
         $smarty->assign('parent_id', $parentId);
         $smarty->assign('value', $value);
         $smarty->assign('name', $name);

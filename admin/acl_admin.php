@@ -91,7 +91,7 @@ switch ($_POST['action']) {
                 if (is_object($rs)) {
                     while ($row = $rs->FetchRow()) {
                         list ($sectionValue, $value, $section, $obj) = $row;
-                        $gaclApi->debugText("Section Value: $sectionValue Value: $value Section: $section ACO: $aco");
+                        $gaclApi->debugText("Section Value: $sectionValue Value: $value Section: $section ACO: $obj");
                         ${$typeArray}[$sectionValue . '^' . $value] = $section . ' > ' . $obj;
                     }
                 }
@@ -180,16 +180,16 @@ switch ($_POST['action']) {
         // echo "Section Value: ". $aclSectionValue ."<br>\n";
 
         $smarty->assign('options_acl_sections', $optionsAclSections);
-        $smarty->assign('acl_section_value', $aclSectionValue);
+        $smarty->assign('acl_section_value', (isset($aclSectionValue) ? $aclSectionValue : ''));
 
         $smarty->assign('options_axo_sections', $optionsAxoSections);
-        $smarty->assign('axo_section_value', $axoSectionValue);
+        $smarty->assign('axo_section_value', (isset($axoSectionValue) ? $axoSectionValue : ''));
 
         $smarty->assign('options_aro_sections', $optionsAroSections);
-        $smarty->assign('aro_section_value', $aroSectionValue);
+        $smarty->assign('aro_section_value', (isset($aroSectionValue) ? $aroSectionValue : ''));
 
         $smarty->assign('options_aco_sections', $optionsAcoSections);
-        $smarty->assign('aco_section_value', $acoSectionValue);
+        $smarty->assign('aco_section_value', (isset($acoSectionValue) ? $acoSectionValue : ''));
 
         $smarty->assign('js_array', $jsArray);
 
@@ -199,31 +199,31 @@ switch ($_POST['action']) {
 
         // Grab formatted ARO Groups for select box
         $smarty->assign('options_aro_groups', $gaclApi->formatGroups($gaclApi->sortGroups('ARO')));
-        $smarty->assign('selected_aro_groups', $selectedAroGroups);
+        $smarty->assign('selected_aro_groups', (isset($selectedAroGroups) ? $selectedAroGroups : ''));
 
         // Grab formatted AXO Groups for select box
         $smarty->assign('options_axo_groups', $gaclApi->formatGroups($gaclApi->sortGroups('AXO')));
-        $smarty->assign('selected_axo_groups', $selectedAxoGroups);
+        $smarty->assign('selected_axo_groups', (isset($selectedAxoGroups) ? $selectedAxoGroups : ''));
 
         $smarty->assign('allow', $allow);
         $smarty->assign('enabled', $enabled);
-        $smarty->assign('return_value', $returnValue);
-        $smarty->assign('note', $note);
+        $smarty->assign('return_value', (isset($returnValue) ? $returnValue : ''));
+        $smarty->assign('note', (isset($note) ? $note : ''));
 
         if (isset($optionsSelectedAco)) {
             $smarty->assign('options_selected_aco', $optionsSelectedAco);
         }
-        $smarty->assign('selected_aco', (is_array($optionsSelectedAco) ? array_keys($optionsSelectedAco) : false));
+        $smarty->assign('selected_aco', (isset($optionsSelectedAco) && is_array($optionsSelectedAco) ? array_keys($optionsSelectedAco) : false));
 
         if (isset($optionsSelectedAro)) {
             $smarty->assign('options_selected_aro', $optionsSelectedAro);
         }
-        $smarty->assign('selected_aro', (is_array($optionsSelectedAro) ? array_keys($optionsSelectedAro) : false));
+        $smarty->assign('selected_aro', (isset($optionsSelectedAro) && is_array($optionsSelectedAro) ? array_keys($optionsSelectedAro) : false));
 
         if (isset($optionsSelectedAxo)) {
             $smarty->assign('options_selected_axo', $optionsSelectedAxo);
         }
-        $selectedAxo = (is_array($optionsSelectedAxo) ? array_keys($optionsSelectedAxo) : false);
+        $selectedAxo = (isset($optionsSelectedAxo) && is_array($optionsSelectedAxo) ? array_keys($optionsSelectedAxo) : false);
 
         $smarty->assign('selected_axo', $selectedAxo);
 

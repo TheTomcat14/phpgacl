@@ -29,8 +29,8 @@ switch (strtolower(trim($objectType))) {
         exit();
         break;
 }
-
-switch ($_POST['action']) {
+$action = (isset($_POST['action']) ? $_POST['action'] : null);
+switch ($action) {
     case 'Delete':
         if (count($_POST['delete_object']) > 0) {
             foreach ($_POST['delete_object'] as $id) {
@@ -79,7 +79,7 @@ switch ($_POST['action']) {
         . "FROM $objectTable "
         . "WHERE section_value = '" . $_GET['section_value'] . "' "
         . "ORDER BY order_value";
-        $rs = $db->pageexecute($query, $gaclApi->itemsPerPage, $_GET['page']);
+        $rs = $db->pageexecute($query, $gaclApi->itemsPerPage, (isset($_GET['page']) ? $_GET['page'] : 0));
         $rows = $rs->GetRows();
 
         while (list (, $row) = @each($rows)) {

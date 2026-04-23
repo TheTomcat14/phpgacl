@@ -41,7 +41,7 @@ $query = 'SELECT a.value AS a_value, a.name AS a_name, '
 . 'ORDER BY a.value, b.value, c.value, d.value, e.value, f.value';
 
 // $rs = $db->Execute($query);
-$rs = $db->pageexecute($query, $gaclApi->itemsPerPage, $_GET['page']);
+$rs = $db->pageexecute($query, $gaclApi->itemsPerPage, (isset($_GET['action']) ? $_GET['page'] : ''));
 $rows = $rs->GetRows();
 
 /*
@@ -51,7 +51,8 @@ $rows = $rs->GetRows();
  */
 
 $totalRows = count($rows);
-
+$totalAclCheckTime = 0;
+$tmpAcoSectionName = null;
 while (list (, $row) = @each($rows)) {
     list ($acoSectionValue, $acoSectionName, $acoValue, $acoName,
         $aroSectionValue, $aroSectionName, $aroValue, $aroName,

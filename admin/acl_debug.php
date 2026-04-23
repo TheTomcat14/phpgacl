@@ -1,7 +1,9 @@
 <?php
 require_once 'gacl_admin.inc.php';
 
-switch ($_GET['action']) {
+$action = (isset($_GET['action']) ? $_GET['action'] : null);
+
+switch ($action) {
     case 'Submit':
         $gaclApi->debugText('Submit!!');
         // $result = $gaclApi->aclQuery('system', 'email_pw', 'users', '1', null, null, null, null, true);

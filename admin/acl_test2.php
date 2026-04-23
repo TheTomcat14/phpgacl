@@ -22,7 +22,7 @@ $query = 'SELECT a.value AS a_value, a.name AS a_name, '
 . 'ORDER BY a.value, b.value, c.value, d.value';
 
 // $rs = $db->Execute($query);
-$rs = $db->pageexecute($query, $gaclApi->itemsPerPage, $_GET['page']);
+$rs = $db->pageexecute($query, $gaclApi->itemsPerPage, (isset($_GET['page']) ? $_GET['page'] : 0));
 $rows = $rs->GetRows();
 
 /*
@@ -32,7 +32,8 @@ $rows = $rs->GetRows();
  */
 
 $totalRows = count($rows);
-
+$totalAclCheckTime = 0;
+$tmpAcoSectionName = null;
 while (list (, $row) = @each($rows)) {
     list ($acoSectionValue, $acoSectionName, $acoValue, $acoName,
         $aroSectionValue, $aroSectionName, $aroValue, $aroName) = $row;
@@ -65,11 +66,11 @@ while (list (, $row) = @each($rows)) {
         'access'            => $access,
         'return_value'      => $returnValue,
         'acl_check_time'    => number_format($aclCheckTime, 2),
-        'display_aco_name' => $displayAcoName
+        'display_aco_name'  => $displayAcoName
     ];
 
     $tmpAcoSectionName = $acoSectionName;
-    $tmpAcoName = $acoName;
+    $tmpAcoName        = $acoName;
 }
 
 // echo "<br><br>$x ACL_CHECK()'s<br>\n";

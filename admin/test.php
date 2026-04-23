@@ -152,7 +152,7 @@ showarray($test);
 
 /*
 //require_once('../Cache_Lite.php');
-require_once('./profiler.inc');
+require_once('./profiler.inc.php');
 $profiler = new Profiler(true, true);
 
 $options = array(

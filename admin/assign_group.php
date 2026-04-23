@@ -27,7 +27,9 @@ switch (strtolower(trim($groupType))) {
         break;
 }
 
-switch ($_POST['action']) {
+$action = (isset($_POST['action']) ? $_POST['action'] : null);
+
+switch ($action) {
     case 'Remove':
         $gaclApi->debugText('Delete!!');
 
@@ -140,7 +142,7 @@ switch ($_POST['action']) {
         . 'WHERE a.group_id = ' . $db->qstr($_GET['group_id']) . ' '
         . 'ORDER BY c.name, b.name';
         // $rs = $db->Execute($query);
-        $rs = $db->PageExecute($query, $gaclApi->itemsPerPage, $_GET['page']);
+        $rs = $db->PageExecute($query, $gaclApi->itemsPerPage, (isset($_GET['page']) ? $_GET['page'] : 0));
 
         $objectRows = [];
 

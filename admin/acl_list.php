@@ -1,7 +1,7 @@
 <?php
 require_once 'gacl_admin.inc.php';
-
-switch ($_GET['action']) {
+$action = (isset($_GET['action']) ? $_GET['action'] : null);
+switch ($action) {
     case 'Delete':
         $gaclApi->debugText('Delete!');
 
@@ -104,15 +104,27 @@ switch ($_GET['action']) {
 
         $aclIds = [];
 
-        $rs = $db->PageExecute($query, $gaclApi->itemsPerPage, $_GET['page']);
+        $rs = $db->PageExecute($query, $gaclApi->itemsPerPage, (isset($_GET['page']) ? $_GET['page'] : 0));
         if (is_object($rs)) {
-            $smarty->assign('paging_data', $gaclApi->get_paging_data($rs));
+            $smarty->assign('paging_data', $gaclApi->getPagingData($rs));
 
             while ($row = $rs->FetchRow()) {
                 $aclIds[] = $row[0];
             }
 
             $rs->Close();
+        } else {
+            $smarty->assign(
+                'paging_data',
+                [
+                    'prevpage'    => 0,
+                    'currentpage' => 0,
+                    'nextpage'    => 0,
+                    'atfirstpage' => 0,
+                    'atlastpage'  => 0,
+                    'lastpageno'  => 0,
+                ]
+            );
         }
 
         if (!empty($aclIds)) {
@@ -125,7 +137,7 @@ switch ($_GET['action']) {
         $acls = [];
 
         // If the user is searching, and there are no results, don't run the query at all
-        if (! ($_GET['action'] == 'Filter' and $aclIdsSql == - 1)) {
+        if (! ($action == 'Filter' and $aclIdsSql == - 1)) {
             // grab acl details
             $query = 'SELECT a.id,x.name,a.allow,a.enabled,a.return_value,a.note,a.updated_date '
             . 'FROM ' . $gaclApi->dbTablePrefix . 'acl a '
@@ -195,15 +207,15 @@ switch ($_GET['action']) {
 
         $smarty->assign('acls', $acls);
 
-        $smarty->assign('filter_aco', $_GET['filter_aco']);
+        $smarty->assign('filter_aco', (isset($_GET['filter_aco']) ? $_GET['filter_aco'] : ''));
 
-        $smarty->assign('filter_aro', $_GET['filter_aro']);
-        $smarty->assign('filter_aro_group', $_GET['filter_aro_group']);
+        $smarty->assign('filter_aro', (isset($_GET['filter_aro']) ? $_GET['filter_aro'] : ''));
+        $smarty->assign('filter_aro_group', (isset($_GET['filter_aro_group']) ? $_GET['filter_aro_group'] : ''));
 
-        $smarty->assign('filter_axo', $_GET['filter_axo']);
-        $smarty->assign('filter_axo_group', $_GET['filter_axo_group']);
+        $smarty->assign('filter_axo', (isset($_GET['filter_axo']) ? $_GET['filter_axo'] : ''));
+        $smarty->assign('filter_axo_group', (isset($_GET['filter_axo_group']) ? $_GET['filter_axo_group'] : ''));
 
-        $smarty->assign('filter_return_value', $_GET['filter_return_value']);
+        $smarty->assign('filter_return_value', (isset($_GET['filter_return_value']) ? $_GET['filter_return_value'] : ''));
 
         foreach (['aco', 'aro', 'axo', 'acl'] as $type) {
             //
@@ -248,7 +260,7 @@ switch ($_GET['action']) {
         $smarty->assign('filter_enabled', $_GET['filter_enabled']);
 }
 
-$smarty->assign('action', $_GET['action']);
+$smarty->assign('action', $action);
 $smarty->assign('return_page', $_SERVER['PHP_SELF']);
 
 $smarty->assign('current', 'acl_list');
