@@ -45,16 +45,38 @@ namespace Higis\PhpGacl;
 class Gacl
 {
 
+    /**
+     * String identifying the ACO type
+     *
+     * @var string
+     */
     const TYPE_ACO = 'aco';
 
+    /**
+     * String identifying the AXO type
+     *
+     * @var string
+     */
     const TYPE_AXO = 'axo';
 
+    /**
+     * String identifying the ARO type
+     *
+     * @var string
+     */
     const TYPE_ARO = 'aro';
 
+    /**
+     * String identifying the ACL type
+     *
+     * @var string
+     */
     const TYPE_ACL = 'acl';
 
-    /*
+    /**
      * --- phpGACL Configuration path/file ---
+     *
+     * @var string
      */
     public $config_file = './gacl.ini.php';
 
@@ -114,13 +136,13 @@ class Gacl
     public $groupSwitch = '_group_';
 
     /**
-     *
+     * The logger object
      * @var \Psr\Log\LoggerInterface
      */
     public $logger = null;
 
     /**
-     *
+     * The Cache object
      * @var \Psr\Cache\CacheItemPoolInterface
      */
     public $cache = null;
@@ -221,6 +243,13 @@ class Gacl
         return true;
     }
 
+    /**
+     * Implementation of magic __call() function
+     *
+     * @param string $name      The name of the method, gets converted to camelcase format when trying to lookup the method inside the object
+     * @param array  $arguments Array with the parameters for the method
+     * @return mixed
+     */
     public function __call($name, $arguments)
     {
         $camelCase = $this->toCamelCase($name);
@@ -232,6 +261,12 @@ class Gacl
         throw new \Exception('Method ' . $name . ' does not exist.');
     }
 
+    /**
+     * Implementation of magic __get() function
+     *
+     * @param string $name  The name of the property, gets converted to camelcase format when trying to lookup the property inside the object
+     * @return mixed
+     */
     public function __get($name)
     {
         $camelCase = $this->toCamelCase($name);
@@ -243,6 +278,13 @@ class Gacl
         throw new \Exception('Variable ' . $name . ' does not exist.');
     }
 
+    /**
+     * Implementation of magic __set() function
+     *
+     * @param string $name  The name of the property
+     * @param mixed  $values The value of the property
+     * @return Gacl
+     */
     public function __set($name, $value)
     {
         $camelCase = $this->toCamelCase($name);
@@ -376,7 +418,6 @@ class Gacl
      * @param array  $aroArray An named array of arrays,
      *                         each element in the format aro_section_value=>array(aro_value1,aro_value1,...)
      * @return mixed The same data format as inputted.
-     *         \*======================================================================
      */
     public function aclCheckArray($acoSectionValue, $acoValue, $aroArray)
     {

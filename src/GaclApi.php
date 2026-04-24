@@ -52,12 +52,16 @@ namespace Higis\PhpGacl;
  */
 class GaclApi extends Gacl
 {
-
+    /** @var string String for TEXT format */
     const FORMAT_TYPE_TEXT  = 'TEXT';
+    /** @var string String for HTML format */
     const FORMAT_TYPE_HTML  = 'HTML';
+    /** @var string String for ARRAY format */
     const FORMAT_TYPE_ARRAY = 'ARRAY';
 
+    /** @var string String for recursive fetch */
     const FETCH_RECURSE    = 'RECURSE';
+    /** @var string String for no recursive fetch */
     const FETCH_NO_RECURSE = 'NO_RECURSE';
 
     /*
@@ -112,7 +116,7 @@ class GaclApi extends Gacl
      */
     public function getVersion()
     {
-        $query = "select value from " . $this->dbTablePrefix . "phpgacl where name = 'version'";
+        $query = "SELECT value FROM " . $this->dbTablePrefix . "phpgacl WHERE name = 'version'";
         $version = $this->db->GetOne($query);
 
         return $version;
@@ -125,7 +129,7 @@ class GaclApi extends Gacl
      */
     public function getSchemaVersion()
     {
-        $query = "select value from " . $this->dbTablePrefix . "phpgacl where name = 'schema_version'";
+        $query = "SELECT value FROM " . $this->dbTablePrefix . "phpgacl WHERE name = 'schema_version'";
         $version = $this->db->GetOne($query);
 
         return $version;
@@ -748,7 +752,7 @@ class GaclApi extends Gacl
         }
 
         // Grab ACL information
-        $query = "select id, allow, enabled, return_value, note from " . $this->dbTablePrefix . "acl where id = " . $aclId . "";
+        $query = "SELECT id, allow, enabled, return_value, note FROM " . $this->dbTablePrefix . "acl WHERE id = " . $aclId . "";
         $aclRow = $this->db->GetRow($query);
 
         // return false if not found
@@ -762,8 +766,8 @@ class GaclApi extends Gacl
         list ($retarr['acl_id'], $retarr['allow'], $retarr['enabled'], $retarr['return_value'], $retarr['note']) = $aclRow;
 
         // Grab selected ACO's
-        $query = "select distinct a.section_value, a.value, c.name, b.name from " . $this->dbTablePrefix . "aco_map a, " . $this->dbTablePrefix . "aco b, " . $this->dbTablePrefix . "aco_sections c
-              where ( a.section_value=b.section_value AND a.value = b.value) AND b.section_value=c.value AND a.acl_id = $aclId";
+        $query = "SELECT DISTINCT a.section_value, a.value, c.name, b.name FROM " . $this->dbTablePrefix . "aco_map a, " . $this->dbTablePrefix . "aco b, " . $this->dbTablePrefix . "aco_sections c
+              WHERE ( a.section_value=b.section_value AND a.value = b.value) AND b.section_value = c.value AND a.acl_id = $aclId";
         $rs = $this->db->Execute($query);
         $rows = $rs->GetRows();
 
@@ -777,8 +781,8 @@ class GaclApi extends Gacl
         // showarray($aco);
 
         // Grab selected ARO's
-        $query = "select distinct a.section_value, a.value, c.name, b.name from " . $this->dbTablePrefix . "aro_map a, " . $this->dbTablePrefix . "aro b, " . $this->dbTablePrefix . "aro_sections c
-              where ( a.section_value=b.section_value AND a.value = b.value) AND b.section_value=c.value AND a.acl_id = $aclId";
+        $query = "SELECT DISTINCT a.section_value, a.value, c.name, b.name FROM " . $this->dbTablePrefix . "aro_map a, " . $this->dbTablePrefix . "aro b, " . $this->dbTablePrefix . "aro_sections c
+              WHERE ( a.section_value=b.section_value AND a.value = b.value) AND b.section_value = c.value AND a.acl_id = $aclId";
         $rs = $this->db->Execute($query);
         $rows = $rs->GetRows();
 
@@ -792,8 +796,8 @@ class GaclApi extends Gacl
         // showarray($options_aro);
 
         // Grab selected AXO's
-        $query = "select distinct a.section_value, a.value, c.name, b.name from " . $this->dbTablePrefix . "axo_map a, " . $this->dbTablePrefix . "axo b, " . $this->dbTablePrefix . "axo_sections c
-              where ( a.section_value=b.section_value AND a.value = b.value) AND b.section_value=c.value AND a.acl_id = $aclId";
+        $query = "SELECT DISTINCT a.section_value, a.value, c.name, b.name FROM " . $this->dbTablePrefix . "axo_map a, " . $this->dbTablePrefix . "axo b, " . $this->dbTablePrefix . "axo_sections c
+              WHERE ( a.section_value=b.section_value AND a.value = b.value) AND b.section_value = c.value AND a.acl_id = $aclId";
         $rs = $this->db->Execute($query);
         $rows = $rs->GetRows();
 
@@ -808,13 +812,13 @@ class GaclApi extends Gacl
 
         // Grab selected ARO groups.
         $retarr['aro_groups'] = [];
-        $query = "select distinct group_id from " . $this->dbTablePrefix . "aro_groups_map where  acl_id = $aclId";
+        $query = "SELECT DISTINCT group_id FROM " . $this->dbTablePrefix . "aro_groups_map WHERE acl_id = $aclId";
         $retarr['aro_groups'] = $this->db->GetCol($query);
         // showarray($selected_groups);
 
         // Grab selected AXO groups.
         $retarr['axo_groups'] = [];
-        $query = "select distinct group_id from " . $this->dbTablePrefix . "axo_groups_map where  acl_id = $aclId";
+        $query = "SELECT DISTINCT group_id FROM " . $this->dbTablePrefix . "axo_groups_map WHERE  acl_id = $aclId";
         $retarr['axo_groups'] = $this->db->GetCol($query);
         // showarray($selected_groups);
 
@@ -1542,7 +1546,6 @@ class GaclApi extends Gacl
         SELECT		g1.id
         FROM		' . $table . ' g1';
 
-        // FIXME-mikeb: Why is group_id in quotes?
         switch (strtoupper($recurse)) {
             case self::FETCH_RECURSE:
                 $query .= '
